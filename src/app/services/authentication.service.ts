@@ -28,8 +28,10 @@ export class AuthenticationService {
     });
 
     if (response.status != 200) {
-      console.error(response)
-      throw Error("Onjuiste gebruikersnaam of wachtwoord.")
+      switch(response.status) {
+        case 403:
+          throw new Error("Onjuiste gebruikersnaam of wachtwoord.");
+      }
     }
 
     return await response.json();
@@ -40,7 +42,7 @@ export class AuthenticationService {
 
     return {
       brpId: parsedToken.brpId,
-      id: parsedToken.userId,
+      userId: parsedToken.userId,
       username: parsedToken.sub,
       roles: parsedToken.roles,
       jwt: jwt
