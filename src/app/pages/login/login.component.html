@@ -1,3 +1,22 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <h1>Inloggen op Mijn Rekeningrijden</h1>
+  <div class="content">
+
+    <p id="info">Log hier in met je gebruikersnaam en wachtwoord. Heb je nog geen account? <a routerLink="/registreren">Ga dan naar deze pagina om
+      jezelf te registreren.</a></p>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Gebruikersnaam</mat-label>
+      <input [(ngModel)]="username" matInput placeholder="Gebruikersnaam">
+      <mat-icon matPrefix>perm_identity</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Wachtwoord</mat-label>
+      <input [(ngModel)]="password" type="password" matInput placeholder="Wachtwoord">
+      <mat-icon matPrefix>lock</mat-icon>
+    </mat-form-field>
+
+    <button (click)="login()" id="login-button" mat-flat-button>Inloggen op Mijn Rekeningrijden</button>
+  </div>
+</div>
