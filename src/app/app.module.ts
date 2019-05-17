@@ -10,6 +10,7 @@ import { MatToolbarModule, MatFormFieldModule, MatIconModule, MatInputModule, Ma
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { MatProgressButtonsModule } from 'mat-progress-buttons';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegisterComponent } from './pages/register/register.component';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressButtonsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

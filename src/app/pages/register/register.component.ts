@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ValidateBsn } from 'src/app/validator/ValidateBsn';
+import { ValidateDate } from 'src/app/validator/ValidateDate';
+import { MatProgressButtonOptions } from 'mat-progress-buttons';
 
 @Component({
   selector: 'app-register',
@@ -10,24 +13,24 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  // buttonOptions: MatProgressButtonOptions = {
-  //   active: false,
-  //   text: 'Registreren op Mijn Rekeningrijden',
-  //   spinnerSize: 19,
-  //   spinnerColor: 'white',
-  //   fullWidth: false,
-  //   disabled: false,
-  //   mode: 'indeterminate',
-  // }
+  buttonOptions: MatProgressButtonOptions = {
+    active: false,
+    text: 'Registreren op Mijn Rekeningrijden',
+    spinnerSize: 19,
+    spinnerColor: "primary",
+    fullWidth: false,
+    disabled: false,
+    mode: 'indeterminate',
+  }
 
-  constructor(private formBuilder: FormBuilder, /*private service: UserService, private identityService: IdentityService,*/ private router: Router) { }
+  constructor(private formBuilder: FormBuilder, /*private service: UserService, */ private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      bsn: ['', [/*Validators.required, ValidateBsn*/]],
-      birthday: ['', [/*Validators.required, DateValidator*/]],
+      bsn: ['', [Validators.required, ValidateBsn]],
+      birthday: ['', [Validators.required, ValidateDate]],
       zipcode: ['', [Validators.required, Validators.pattern(/^[1-9][0-9]{3}[\s]?[A-Za-z]{2}$/i)]],
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/) /*Validator that check availabillity*/]],
+      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern(/^(((\\+31|0|0031)6){1}[1-9]{1}[0-9]{7})$/i)]]
@@ -40,15 +43,9 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    // this.buttonOptions.active = true;
+    this.buttonOptions.active = true;
 
     // const registration = new Registration(form.birthday, form.bsn, form.email, form.password, form.phone, form.username, form.zipcode);
-
-    // if (! await this.identityService.hasCorrectIdentity(registration.bsn, new Date(registration.birthday))) {
-    //   alert("Sorry, deze combinatie BSN + geboortedatum is niet bekend bij de overheid.");
-    //   this.buttonOptions.active = false;
-    //   return
-    // }
 
     // try {
     //   await this.service.save(registration);
@@ -56,7 +53,7 @@ export class RegisterComponent implements OnInit {
     //   console.error(e)
     // }
 
-    // this.buttonOptions.active = false;
+    this.buttonOptions.active = false;
 
     this.router.navigate(["/login", { "redirect": "post-registration" }])
   }
