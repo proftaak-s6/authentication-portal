@@ -4,7 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
-  { component: LoginComponent, path: "login", data: { title: "Inloggen op Mijn Rekeningrijden" } },
+  { component: LoginComponent, path: "", data: { title: "Inloggen op Mijn Rekeningrijden" } },
   { component: RegisterComponent, path: "registreren", data: { title: "Registreren op Mijn Rekeningrijden" } }
 ];
 
