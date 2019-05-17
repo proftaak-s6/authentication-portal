@@ -1,0 +1,88 @@
+<div class="container">
+  <h1>Registreren op Mijn Rekeningrijden</h1>
+  <div class="content">
+
+    <p id="info">Op deze pagina kun je je registreren voor het nieuwe rekeningrijden. Zorg ervoor dat je je
+      burgerservicenummer en
+      andere persoonlijke gegevens bij de hand hebt.<br><br>Heb je al een account? Log dan in <a routerLink="">op deze
+        pagina.</a></p>
+
+
+    <h2>Persoonlijke gegevens</h2>
+
+
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="registerUser(registerForm.value)">
+
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Burgerservicenummer</mat-label>
+        <input matInput type="text" formControlName="bsn" id="bsn" required>
+        <mat-icon matPrefix>vpn_key_outline</mat-icon>
+        <mat-error *ngIf="hasError('bsn', 'required')">Dit is een verplicht veld.</mat-error>
+        <mat-error *ngIf="hasError('bsn', 'containsNonAlphanumerics')">Een BSN kan alleen uit cijfers bestaan.
+        </mat-error>
+        <mat-error *ngIf="hasError('bsn', 'hasInvalidCharCount')">Een BSN moet uit 9 karakters bestaan.</mat-error>
+        <mat-error *ngIf="hasError('bsn', 'invalidBsn')">Ongeldig burgerservicenummer.</mat-error>
+        <mat-error *ngIf="hasError('registerForm', 'invalidIdentity')">Ongeldige combinatie bsn + geboortedatum.
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Geboortedatum</mat-label>
+        <input matInput (click)="picker.open()" formControlName="birthday" id="birthday" name="birthday"
+          [matDatepicker]="picker">
+        <mat-icon (click)="picker.open()" matPrefix>date_range_outline</mat-icon>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('birthday', 'required')">Dit is een verplicht veld.</mat-error>
+        <mat-error *ngIf="hasError('birthday', 'invalidDate')">Ongeldig format, gebruik DD/MM/YYY</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Postcode</mat-label>
+        <input matInput formControlName="zipcode" id="zipcode" name="zipcode">
+        <mat-icon matPrefix>home</mat-icon>
+        <mat-error *ngIf="hasError('zipcode', 'required')">Dit is een verplicht veld.</mat-error>
+        <mat-error *ngIf="hasError('zipcode', 'pattern')">Ongeldige postcode.</mat-error>
+      </mat-form-field>
+
+      <h2>Inloggegevens</h2>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Gebruikersnaam</mat-label>
+        <input formControlName="username" id="username" name="username" matInput>
+        <mat-icon matPrefix>perm_identity_outline</mat-icon>
+        <mat-error *ngIf="hasError('username', 'required')">Dit is een verplicht veld.</mat-error>
+        <mat-error *ngIf="hasError('username', 'pattern')">Ongeldige gebruikersnaam, alleen letters en cijfers zijn
+          toegestaan.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Wachtwoord</mat-label>
+        <input formControlName="password" id="password" name="password" matInput type="password">
+        <mat-error *ngIf="hasError('password', 'required')">Dit is een verplicht veld.</mat-error>
+        <mat-icon matPrefix>lock_outline</mat-icon>
+      </mat-form-field>
+
+      <h2>Contactgegevens</h2>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Emailadres</mat-label>
+        <input formControlName="email" id="email" name="email" matInput>
+        <mat-error *ngIf="hasError('email', 'required')">Dit is een verplicht veld.</mat-error>
+        <mat-error *ngIf="hasError('email', 'email')">Ongeldig emailadres.</mat-error>
+        <mat-icon matPrefix>email_outline</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Telefoonnummer</mat-label>
+        <input formControlName="phone" id="phone" name="phone" matInput>
+        <mat-error *ngIf="hasError('phone', 'required')">Dit is een verplicht veld.</mat-error>
+        <mat-error *ngIf="hasError('phone', 'pattern')">Ongeldig telefoonnummer.</mat-error>
+        <mat-icon matPrefix>phone_outline</mat-icon>
+      </mat-form-field>
+      <!-- <mat-spinner-button id="login-button" [options]="buttonOptions"></mat-spinner-button> -->
+      <!-- <button type="submit" id="login-button" mat-flat-button>Registreren op Mijn Rekeningrijden</button>
+       -->
+    </form>
+  </div>
+</div>
