@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import User from '../model/User';
 import JwtToken from '../model/JwtToken';
+import Registration from '../model/Registration';
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +29,30 @@ export class AuthenticationService {
     });
 
     if (response.status != 200) {
-      switch(response.status) {
+      switch (response.status) {
         case 403:
           throw new Error("Onjuiste gebruikersnaam of wachtwoord.");
       }
     }
 
     return await response.json();
+  }
+
+  async register(registration: Registration): Promise<boolean> {
+    const response = await fetch(`${this.baseUrl}/users`, {
+      method: "POST",
+      body: JSON.stringify(registration),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    switch (response.status) {
+      case 201: return true;
+      default: {
+        return false;
+      }
+    }
   }
 
   verifyJwt(jwt: JwtToken): User {

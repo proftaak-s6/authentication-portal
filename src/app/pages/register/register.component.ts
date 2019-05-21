@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { ValidateBsn } from 'src/app/validator/ValidateBsn';
 import { ValidateDate } from 'src/app/validator/ValidateDate';
 import { MatProgressButtonOptions } from 'mat-progress-buttons';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import Registration from 'src/app/model/Registration';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +26,7 @@ export class RegisterComponent implements OnInit {
     mode: 'indeterminate',
   }
 
-  constructor(private formBuilder: FormBuilder, /*private service: UserService, */ private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private service: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -45,17 +48,23 @@ export class RegisterComponent implements OnInit {
 
     this.buttonOptions.active = true;
 
-    // const registration = new Registration(form.birthday, form.bsn, form.email, form.password, form.phone, form.username, form.zipcode);
+    const registration: Registration = {
+      birthday: moment(form.birthday).format("DD/MM/YYYY").toString(),
+      bsn: form.bsn,
+      email: form.email,
+      password: form.password,
+      phoneNumber: form.phone,
+      username: form.username,
+      zipCode: form.zipcode,
+      roles: ["user"]
+    }
 
-    // try {
-    //   await this.service.save(registration);
-    // } catch (e) {
-    //   console.error(e)
-    // }
+    const registered: boolean = await this.service.register(registration);
 
-    this.buttonOptions.active = false;
-
-    this.router.navigate(["/login", { "redirect": "post-registration" }])
+    if (registered) {
+      this.buttonOptions.active = false;
+      this.router.navigate(["/"], { queryParams: { "redirect": "post-registration" } })
+    }
   }
 
   public hasError = (controlName: string, errorName: string) => {

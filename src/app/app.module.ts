@@ -34,7 +34,11 @@ import { MatProgressButtonsModule } from 'mat-progress-buttons';
     MatNativeDateModule,
     MatProgressButtonsModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE, useValue: 'en-GB'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
