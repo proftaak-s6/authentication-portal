@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>Gebruikersrollen</h1>
+  <div class="content">
+
+    <p id="info">Verschillende gebruikers hebben toegang tot verschillende systemen. In onderstaant scherm kun jij als
+      administrator gebruikers toegang verlenen (of ontnemen) tot één of meerdere van deze systemen.</p>
+    <p id="info">De volgende rollen bestaan voor het Rekeningrijden systeem:
+
+      <li>Rekeningrijder <span class="sub">(Toegang tot mijn.rekeningrijden.nl)</span></li>
+      <li>Overheid <span class="sub">(Toegang tot overheid.rekeningrijden.nl)</span></li>
+      <li>Politie <span class="sub">(Toegang tot politie.rekeningrijden.nl)</span></li>
+    </p>
+
+    <p id="info">Vul hieronder een BSN in om te beginnen</p>
+
+    <form [formGroup]="form" novalidate (ngSubmit)="search(form.value)">
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>BSN</mat-label>
+        <input formControlName="bsn" id="bsn" name="bsn" matInput>
+        <mat-error *ngIf="hasError('bsn', 'required')">Dit veld is verplicht.</mat-error>
+        <mat-error *ngIf="hasError('bsn', 'containsNonAlphanumerics')">Een BSN kan alleen uit cijfers bestaan.</mat-error>
+        <mat-error *ngIf="hasError('bsn', 'hasInvalidCharCount')">Een BSN moet uit 9 karakters bestaan.</mat-error>
+        <mat-error *ngIf="hasError('bsn', 'invalidBsn')">Ongeldig burgerservicenummer.</mat-error>
+      </mat-form-field>
+      <button style="float: left;" type="submit" id="login-button" mat-flat-button>Zoek...</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="errorMessage || user" class="container">
+  <div class="content">
+    
+    <p style="color: crimson" *ngIf="errorMessage">{{errorMessage}}</p>
+
+    <div *ngIf="user">
+      <h1>{{user.username}}</h1>
+      <h2>Rollen</h2>
+    </div>
+
+  </div>
+</div>

@@ -11,13 +11,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
