@@ -30,4 +30,27 @@ export class AdminComponent implements OnInit {
 
     return roles.map(roleName => lookup[roleName]).filter(p => p !== '');
   }
+
+  getRoleValues(rolesNames: string[]): string[] {
+    const lookup = {
+      'rekeningrijder': 'driver',
+      'overheid': 'government',
+      'politie': 'police'
+    };
+
+    return ['user', ...rolesNames.map(roleName => lookup[roleName.toLowerCase()])];
+  }
+
+  async edit(id: number, name: string, roles: string[]) {
+    const existingRoles = this.getRoleNames(roles);
+    const newRoles = this.getRoleValues(prompt(`Wijzig de rollen voor ${name}. Comma separated.`, existingRoles.join(', ')).split(', '));
+    
+    const updated = await this.userSerivce.setRoles(id, newRoles);
+
+    if (updated) {
+      this.users = this.userSerivce.getRoleOverview();
+    } else {
+      alert("Er ging iets fout tijdens de update.")
+    }
+  }
 }
