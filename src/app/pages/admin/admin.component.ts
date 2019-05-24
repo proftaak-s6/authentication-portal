@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
     this.users = this.userSerivce.getRoleOverview();
   }
 
-  getRoleNames(roles: string[]): string[] {
+  getRoleNames(roleValues: string[]): string[] {
     const lookup = {
       'user': '',
       'driver': 'Rekeningrijder',
@@ -28,7 +28,7 @@ export class AdminComponent implements OnInit {
       'police': 'Politie'
     };
 
-    return roles.map(roleName => lookup[roleName]).filter(p => p !== '');
+    return roleValues.map(roleValue => lookup[roleValue]).filter(p => p !== '');
   }
 
   getRoleValues(rolesNames: string[]): string[] {
