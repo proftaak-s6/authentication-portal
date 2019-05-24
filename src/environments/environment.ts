@@ -11,6 +11,11 @@ export const environment = {
     authentication: {
       url: 'http://localhost:8080'
     },
+  },
+  redirects: {
+    driver: 'https://www.google.com/search?&q=driver',
+    government: 'https://www.google.com/search?&q=government',
+    police: 'https://www.google.com/search?&q=police'
   }
 };
 
