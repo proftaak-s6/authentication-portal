@@ -11,13 +11,12 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class AdminComponent implements OnInit {
 
-  public usersDataSource: MatTableDataSource<UserRoleOverview>
-  public displayedColumns: string[] = ["firstName", "lastName", "roles"]
+  public users: Promise<UserRoleOverview[]>
+  public displayedColumns: string[] = ["firstName", "lastName", "roles", "actions"]
 
   constructor(private userSerivce: UserService) { }
 
   async ngOnInit() {
-    const users = await this.userSerivce.getRoleOverview();
-    this.usersDataSource = new MatTableDataSource<UserRoleOverview>(users);
+    this.users = this.userSerivce.getRoleOverview();
   }
 }
