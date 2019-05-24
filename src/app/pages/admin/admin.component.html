@@ -11,32 +11,9 @@
       <li>Politie <span class="sub">(Toegang tot politie.rekeningrijden.nl)</span></li>
     </p>
 
-    <p id="info">Vul hieronder een BSN in om te beginnen</p>
+    <h2>Gebruikers</h2>
 
-    <form [formGroup]="form" novalidate (ngSubmit)="search(form.value)">
-
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>BSN</mat-label>
-        <input formControlName="bsn" id="bsn" name="bsn" matInput>
-        <mat-error *ngIf="hasError('bsn', 'required')">Dit veld is verplicht.</mat-error>
-        <mat-error *ngIf="hasError('bsn', 'containsNonAlphanumerics')">Een BSN kan alleen uit cijfers bestaan.</mat-error>
-        <mat-error *ngIf="hasError('bsn', 'hasInvalidCharCount')">Een BSN moet uit 9 karakters bestaan.</mat-error>
-        <mat-error *ngIf="hasError('bsn', 'invalidBsn')">Ongeldig burgerservicenummer.</mat-error>
-      </mat-form-field>
-      <button style="float: left;" type="submit" id="login-button" mat-flat-button>Zoek...</button>
-    </form>
-  </div>
-</div>
-
-<div *ngIf="errorMessage || user" class="container">
-  <div class="content">
-    
-    <p style="color: crimson" *ngIf="errorMessage">{{errorMessage}}</p>
-
-    <div *ngIf="user">
-      <h1>{{user.username}}</h1>
-      <h2>Rollen</h2>
-    </div>
+    <p *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</p>
 
   </div>
 </div>

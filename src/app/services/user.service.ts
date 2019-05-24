@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import OverviewUser from '../model/OverviewUser';
+import OverviewUser from '../model/UserRoleOverview';
 import { environment } from 'src/environments/environment';
+import UserRoleOverview from '../model/UserRoleOverview';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,8 @@ export default class UserService {
 
   constructor() { }
 
-  async getByBsn(bsn: string): Promise<OverviewUser> {
-    const response = await fetch(`${this.baseUrl}/users/${bsn}`);
-
-    if (response.status === 200) {
-      return await response.json();
-    }
-
-    return null;
+  async getRoleOverview(): Promise<UserRoleOverview[]> {
+    const repsonse = await fetch(`${this.baseUrl}/users`);
+    return await repsonse.json();
   }
 }
