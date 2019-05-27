@@ -50,7 +50,8 @@ export class AuthenticationService {
     switch (response.status) {
       case 201: return true;
       default: {
-        return false;
+        const json  = await response.json();
+        throw new Error(json.errors.join('\n'))
       }
     }
   }

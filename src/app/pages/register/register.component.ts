@@ -59,11 +59,15 @@ export class RegisterComponent implements OnInit {
       roles: ["user"]
     }
 
-    const registered: boolean = await this.service.register(registration);
+    try {
+      const registered: boolean = await this.service.register(registration);
 
-    if (registered) {
-      this.buttonOptions.active = false;
-      this.router.navigate(["/"], { queryParams: { "redirect": "post-registration" } })
+      if (registered) {
+        this.buttonOptions.active = false;
+        this.router.navigate(["/"], { queryParams: { "redirect": "post-registration" } })
+      }
+    } catch (e) {
+      alert(e.message)
     }
   }
 
