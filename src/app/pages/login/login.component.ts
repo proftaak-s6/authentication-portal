@@ -22,9 +22,16 @@ export class LoginComponent {
       const user = this.authService.verifyJwt(jwt);
       let redirectUrl = undefined;
 
+
+
       if (user.roles.length === 2) {
         redirectUrl = this.redirects[user.roles[0]];
-      } else {
+      }
+      else if (user.roles.length === 1) {
+        alert("Je hebt nog geen toegang tot een van de portals. Neem contact op met de administrator.");
+        return;
+      }
+      else {
         let choice = undefined;
 
         while (!choice || !redirectUrl) {
