@@ -2,7 +2,7 @@
 version: '3'
 
 services:
-  overheidsportaal:
+  authenticatieportaal:
     container_name: authenticationportaal-frontend 
     build: .
     image: yoksar/authentication-portal
