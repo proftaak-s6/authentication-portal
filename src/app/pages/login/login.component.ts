@@ -22,8 +22,6 @@ export class LoginComponent {
       const user = this.authService.verifyJwt(jwt);
       let redirectUrl = undefined;
 
-
-
       if (user.roles.length === 2) {
         redirectUrl = this.redirects[user.roles[0]];
       }
@@ -40,10 +38,8 @@ export class LoginComponent {
         }
       }
 
-      console.log(redirectUrl);
-
       if (redirectUrl) {
-        window.location = redirectUrl;
+        window.location.href = `${redirectUrl}?jwt=${jwt.token}`;
       } else {
         alert('Oeps...');
       }
