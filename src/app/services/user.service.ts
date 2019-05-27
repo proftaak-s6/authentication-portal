@@ -6,7 +6,7 @@ import UserRoleOverview from '../model/UserRoleOverview';
 @Injectable({
   providedIn: 'root'
 })
-export default class UserService {
+export class UserService {
    private baseUrl: string = environment.services.authentication.url;
 
   constructor() { }

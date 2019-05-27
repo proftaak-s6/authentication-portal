@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
 import { AdminComponent } from './pages/admin/admin.component';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -39,8 +40,9 @@ import { AdminComponent } from './pages/admin/admin.component';
   ],
   providers: [
     {
-      provide: MAT_DATE_LOCALE, useValue: 'en-GB'
-    }
+      provide: MAT_DATE_LOCALE, useValue: 'en-GB',
+    },
+    UserService
   ],
   bootstrap: [AppComponent]
 })
