@@ -1,0 +1,11 @@
+
+version: '3'
+
+services:
+  overheidsportaal:
+    container_name: authenticationportaal-frontend 
+    build: .
+    image: yoksar/authentication-portal
+    ports:
+      - 4600:80
+    restart: unless-stopped
