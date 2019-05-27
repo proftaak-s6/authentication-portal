@@ -13,7 +13,6 @@ export class AdminComponent implements OnInit {
 
   public users: Promise<UserRoleOverview[]>
   public displayedColumns: string[] = ["firstName", "lastName", "roles", "actions"]
-  // private userSerivce = new UserService();
 
   constructor(private userSerivce: UserService) { }
 

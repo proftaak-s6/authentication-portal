@@ -13,6 +13,11 @@ export class UserService {
 
   async getRoleOverview(): Promise<UserRoleOverview[]> {
     const repsonse = await fetch(`${this.baseUrl}/users`);
+
+    if (repsonse.status === 204) {
+      return []
+    }
+
     return await repsonse.json();
   }
 
